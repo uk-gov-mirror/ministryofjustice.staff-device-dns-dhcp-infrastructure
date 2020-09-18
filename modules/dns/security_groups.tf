@@ -1,5 +1,9 @@
+locals {
+  timestamp_string = formatdate("YYYYMMDDhhmmss", timestamp())
+}
+
 resource "aws_security_group" "dns_server" {
-  name        = "${var.prefix}-dns-server"
+  name        = "${var.prefix}-dns-server-${local.timestamp_string}"
   description = "Allow the ECS agent to talk to the ECS endpoints"
   vpc_id      = var.vpc_id
 

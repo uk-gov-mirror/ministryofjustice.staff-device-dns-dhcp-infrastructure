@@ -1,5 +1,9 @@
+locals {
+  timestamp_string = formatdate("YYYYMMDDhhmmss", timestamp())
+}
+
 resource "aws_security_group" "dhcp_server" {
-  name        = "${var.prefix}-dhcp-server"
+  name        = "${var.prefix}-dhcp-server-${local.timestamp_string}"
   description = "Allow the ECS agent to talk to the ECS endpoints"
   vpc_id      = var.vpc_id
 
@@ -26,6 +30,7 @@ resource "aws_security_group" "dhcp_server" {
 
 resource "aws_security_group" "dhcp_db_in" {
   name        = "dhcp-db-in"
+  name        = "${var.prefix}-dhcp-db-in-${local.timestamp_string}"
   description = "Allow connections to the DB"
   vpc_id      = var.vpc_id
 

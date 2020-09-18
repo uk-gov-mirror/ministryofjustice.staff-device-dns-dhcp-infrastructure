@@ -1,5 +1,9 @@
+locals {
+  timestamp_string = formatdate("YYYYMMDDhhmmss", timestamp())
+}
+
 resource "aws_security_group" "admin_alb_in" {
-  name        = "${var.prefix}-alb-in"
+  name        = "${var.prefix}-alb-in-${local.timestamp_string}"
   description = "Allow Inbound Traffic to the admin platform ALB"
   vpc_id      = var.vpc_id
 
@@ -18,7 +22,7 @@ resource "aws_security_group" "admin_alb_in" {
 }
 
 resource "aws_security_group" "admin_alb_out" {
-  name        = "${var.prefix}-alb-out"
+  name        = "${var.prefix}-alb-out-${local.timestamp_string}"
   description = "Allow Outbound Traffic from the admin platform ALB"
   vpc_id      = var.vpc_id
 
@@ -37,7 +41,7 @@ resource "aws_security_group" "admin_alb_out" {
 }
 
 resource "aws_security_group" "admin_db_in" {
-  name        = "${var.prefix}-db-in"
+  name        = "${var.prefix}-db-in-${local.timestamp_string}"
   description = "Allow connections to the DB"
   vpc_id      = var.vpc_id
 
@@ -56,7 +60,7 @@ resource "aws_security_group" "admin_db_in" {
 }
 
 resource "aws_security_group" "admin_ecs_out" {
-  name        = "${var.prefix}-ecs-out"
+  name        = "${var.prefix}-ecs-out-${local.timestamp_string}"
   description = "Allow outbound traffic from ECS"
   vpc_id      = var.vpc_id
 

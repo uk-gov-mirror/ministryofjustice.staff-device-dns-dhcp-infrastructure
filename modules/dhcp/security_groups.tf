@@ -17,6 +17,10 @@ resource "aws_security_group" "dhcp_server" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  lifecycle {
+    create_before_destroy = true
+  }
+
   tags = var.tags
 }
 
@@ -40,5 +44,9 @@ resource "aws_security_group" "dhcp_db_in" {
     to_port     = 0
     protocol    = -1
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }

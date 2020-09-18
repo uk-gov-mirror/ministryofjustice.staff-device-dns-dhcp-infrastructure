@@ -10,6 +10,10 @@ resource "aws_security_group" "admin_alb_in" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  lifecycle {
+    create_before_destroy = true
+  }
+
   tags = var.tags
 }
 
@@ -25,6 +29,10 @@ resource "aws_security_group" "admin_alb_out" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  lifecycle {
+    create_before_destroy = true
+  }
+
   tags = var.tags
 }
 
@@ -38,6 +46,10 @@ resource "aws_security_group" "admin_db_in" {
     to_port     = 3306
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 
   tags = var.tags
@@ -60,6 +72,10 @@ resource "aws_security_group" "admin_ecs_out" {
     to_port     = 0
     protocol    = -1
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 
   tags = var.tags

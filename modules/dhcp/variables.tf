@@ -81,3 +81,7 @@ variable "region" {
 variable "is_publicly_accessible" {
   type = bool
 }
+
+variable "aws_sns_topic_arn" {
+  type = string
+}

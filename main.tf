@@ -112,6 +112,7 @@ module "dhcp" {
   region                                 = data.aws_region.current_region.id
   is_publicly_accessible                 = local.publicly_accessible
   vpc_cidr                               = local.dns_dhcp_vpc_cidr
+  aws_sns_topic_arn                      = module.alarms.aws_sns_topic_arn
 
   providers = {
     aws = aws.env
